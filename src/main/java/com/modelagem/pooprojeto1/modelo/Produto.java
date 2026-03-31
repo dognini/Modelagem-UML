@@ -39,14 +39,12 @@ public class Produto {
         return quantidadeEstoque;
     }
 
-    /** Preço não pode ser zero nem negativo (regra do enunciado). */
     public static void validarPreco(double preco) {
         if (preco <= 0) {
             throw new IllegalArgumentException("Preço deve ser maior que zero.");
         }
     }
 
-    /** Estoque não pode ser zero nem negativo (regra do enunciado). */
     public static void validarQuantidadeEstoque(int qtd) {
         if (qtd <= 0) {
             throw new IllegalArgumentException("Quantidade em estoque deve ser maior que zero.");
@@ -58,16 +56,11 @@ public class Produto {
         this.preco = novoPreco;
     }
 
-    /** Ajuste de estoque (ex.: reposição pelo administrador). */
     public void setQuantidadeEstoque(int novaQtd) {
         validarQuantidadeEstoque(novaQtd);
         this.quantidadeEstoque = novaQtd;
     }
 
-    /**
-     * Baixa no estoque quando a compra é confirmada.
-     * Não deve ser chamado antes da confirmação (ver {@link Compra#finalizarCompra}).
-     */
     public void reduzirEstoque(int quantidade) {
         if (quantidade <= 0) {
             throw new IllegalArgumentException("Quantidade a reduzir deve ser maior que zero.");
@@ -78,7 +71,6 @@ public class Produto {
         this.quantidadeEstoque -= quantidade;
     }
 
-    /** Devolve estoque (útil se uma compra confirmada for cancelada/estornada). */
     public void restaurarEstoque(int quantidade) {
         if (quantidade <= 0) {
             throw new IllegalArgumentException("Quantidade a restaurar deve ser maior que zero.");

@@ -1,3 +1,9 @@
+# PlantUML CLI local (JAR grande; opcional para regerar PNG)
+tools/
+
+# PNG gerado ao lado do .puml (a figura versionada fica em docs/)
+diagramas/*.png
+
 # Compilação Java
 target/
 out/
