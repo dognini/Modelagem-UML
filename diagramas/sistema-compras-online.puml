@@ -1,0 +1,82 @@
+@startuml SistemaComprasOnline
+
+skinparam classAttributeIconSize 0
+
+enum EstadoCompra {
+  PENDENTE
+  CANCELADA
+  CONFIRMADA
+}
+
+enum MeioPagamento {
+  DINHEIRO
+  DEBITO
+  CREDITO
+}
+
+class Comprador {
+  - nome : String
+  - email : String
+  __
+  + Comprador(nome : String, email : String)
+  + getNome() : String
+  + getEmail() : String
+}
+
+class Produto {
+  - nome : String
+  - descricao : String
+  - preco : double
+  - quantidadeEstoque : int
+  __
+  + Produto(nome : String, descricao : String, preco : double, qtdEstoque : int)
+  + getNome() : String
+  + getDescricao() : String
+  + getPreco() : double
+  + getQuantidadeEstoque() : int
+  + setPreco(novoPreco : double) : void
+  + setQuantidadeEstoque(novaQtd : int) : void
+  + reduzirEstoque(quantidade : int) : void
+  + restaurarEstoque(quantidade : int) : void
+}
+
+class ItemCompra {
+  - quantidade : int
+  - precoUnitario : double
+  __
+  + ItemCompra(produto : Produto, quantidade : int, precoUnitario : double)
+  + getProduto() : Produto
+  + getQuantidade() : int
+  + getPrecoUnitario() : double
+  + getSubtotal() : double
+}
+
+class Pagamento {
+  - valor : double
+  - meio : MeioPagamento
+  __
+  + Pagamento(valor : double, meio : MeioPagamento)
+  + getValor() : double
+  + getMeio() : MeioPagamento
+}
+
+class Compra {
+  - estado : EstadoCompra
+  __
+  + Compra(comprador : Comprador)
+  + getComprador() : Comprador
+  + getEstado() : EstadoCompra
+  + getItens() : List<ItemCompra>
+  + getPagamentos() : List<Pagamento>
+  + getTotal() : double
+  + adicionarItem(produto : Produto, quantidade : int) : void
+  + finalizarCompra(pagamentos : List<Pagamento>) : void
+  + cancelar() : void
+}
+
+Comprador "1" <-- "0..*" Compra : comprador
+Compra *-- "1..*" ItemCompra : itens
+ItemCompra }o-- "1" Produto : produto
+Compra o-- "0..*" Pagamento : pagamentos
+
+@enduml

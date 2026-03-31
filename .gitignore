@@ -1,0 +1,14 @@
+# Compilação Java
+target/
+out/
+build/
+*.class
+
+# macOS
+.DS_Store
+
+# IDEs (opcional — reduz ruído no repositório)
+.idea/
+*.iml
+.vscode/
+*.code-workspace
